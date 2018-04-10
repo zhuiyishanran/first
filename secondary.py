@@ -1,7 +1,10 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import re
 
 html = urlopen("http://www.pythonscraping.com/pages/page3.html")
 bs0bj = BeautifulSoup(html,"lxml")
+images = bs0bj.findAll("img",{"src":re.compile("\.\.\/img\/gifts\/img.*\.jpg")})
 
-print(bs0bj.find("img",{"src":"../img/gifts/img1.jpg"}).parent.previous_sibling.get_text())
+for image in images:
+    print(image["src"])
